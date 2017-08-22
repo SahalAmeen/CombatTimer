@@ -1,6 +1,6 @@
 <?php
 
-namespace RumDaDuMCPE\CombatHUD;
+namespace RumDaDuMCPE;
 
 class CombatHUD extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Listener {
 
