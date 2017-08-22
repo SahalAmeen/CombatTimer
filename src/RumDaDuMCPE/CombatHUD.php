@@ -15,7 +15,7 @@ class CombatHUD extends \pocketmine\plugin\PluginBase implements \pocketmine\eve
 
 	public function onMove(\pocketmine\event\player\PlayerMoveEvent $event) {
 		if ($this->playerIsInCombat($event->getPlayer())) {
-			$this->sendHUD($this->player);
+			$this->sendHUD($event->getPlayer());
 		}
 	}
 
