@@ -4,7 +4,7 @@ namespace RumDaDuMCPE;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
 use pocketmine\Player;
-use pocketmine\event\player\PlayerJoinEvent;
+use pocketmine\event\player\PlayerLoginEvent;
 
 class CombatHUD extends PluginBase implements Listener {
 
@@ -21,9 +21,9 @@ class CombatHUD extends PluginBase implements Listener {
 	public static function getInstance() {
 		return self::$instance;
 	}
-	public function onJoin(PlayerJoinEvent $event){
+	public function onJoin(PlayerLoginEvent $event){
 $player = $event->getPlayer();
-		$this->setCreativeCheck(false); //ensures creative checks are false to prevent errors when it isn't recognized.
+		$this->setCreativeCheck($player, false); //ensures creative checks are false to prevent errors when it isn't recognized.
 	}
 
 	public function playerIsInCombat(Player $player) : bool {
