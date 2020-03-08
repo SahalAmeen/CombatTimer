@@ -1,11 +1,16 @@
 <?php
 
 namespace RumDaDuMCPE;
+use pocketmine\plugin\PluginBase;
+use pocketmine\event\Listener;
+use pocketmine\Player;
+use pocketmine\event\player\PlayerLoginEvent;
 
-class CombatHUD extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Listener {
+class CombatHUD extends PluginBase implements Listener {
 
 	private static $instance;
-
+        public $creativeCheck = [];
+	
 	public function onEnable() {
 		self::$instance = $this;
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
@@ -16,14 +21,24 @@ class CombatHUD extends \pocketmine\plugin\PluginBase implements \pocketmine\eve
 	public static function getInstance() {
 		return self::$instance;
 	}
+	public function onJoin(PlayerLoginEvent $event){
+$player = $event->getPlayer();
+		$this->setCreativeCheck($player, false); //ensures creative checks are false to prevent errors when it isn't recognized.
+	}
 
-	public function playerIsInCombat(\pocketmine\Player $player) : bool {
+	public function playerIsInCombat(Player $player) : bool {
 		$cl = $this->getServer()->getPluginManager()->getPlugin("CombatLogger");
 		if ($cl->isTagged($player)) return true;
 		return false;
 	}
+	public function hasCreativeCheck(Player $player): bool{
+         return $this->creativeCheck[$player->getName()];
+	}
+public function setCreativeCheck(Player $player, bool $creativeCheck){
+$this->creativeCheck[$player->getName()] = (bool)$creativeCheck;
+}
 
-	public function sendHUD(\pocketmine\Player $player) : string {
+	public function sendHUD(Player $player) : string {
 		$cl = $this->getServer()->getPluginManager()->getPlugin("CombatLogger");
 		$timeleft = $cl->getTagDuration($player);
 		return	"§l§cYou are now engaged in combat!\n".
