@@ -21,6 +21,7 @@ $plugin->setCreativeCheck($player, true);
 					$player->sendMessage(TextFormat::colorize("&cYou cannot fly whilst in combat. Disabled your flight."));
 				}
 				$player->sendPopup($plugin->sendHUD($player));
+				}
 			} else {
 					if($plugin->hasCreativeCheck($player)){ //checks to ensure creative check doesn't get set to false more than once.
 					$plugin->setCreativeCheck($player, false);
