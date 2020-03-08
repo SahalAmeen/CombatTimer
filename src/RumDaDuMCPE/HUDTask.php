@@ -18,7 +18,7 @@ $plugin->setCreativeCheck($player, true);
 					$player->setAllowFlight(false);
 					$player->setFlying(false);
 					$player->setGamemode(Player::SURVIVAL);
-					$player->sendMessage(TextFormat::colorize("&cYou cannot fly whilst in combat. Disabled your flight."));
+					$player->sendMessage(TextFormat::colorize(”&cYou cannot fly whilst in combat. Disabled your flight.”));
 				}
 				$player->sendPopup($plugin->sendHUD($player));
 			} else {
