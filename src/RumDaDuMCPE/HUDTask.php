@@ -11,7 +11,7 @@ class HUDTask extends Task {
 		$plugin = CombatHUD::getInstance();
 		foreach ($plugin->getServer()->getOnlinePlayers() as $player) {
 			if ($plugin->PlayerisInCombat($player)) {
-				if(!$plugin->CreativeCheck($player)){
+				if(!$plugin->hasCreativeCheck($player)){
 $plugin->setCreativeCheck($player, true);
 				}else{
 				if($player->getAllowFlight()){
@@ -22,7 +22,7 @@ $plugin->setCreativeCheck($player, true);
 				}
 				$player->sendPopup($plugin->sendHUD($player));
 			} else {
-					if($plugin->CreativeCheck($player)){
+					if($plugin->hasCreativeCheck($player)){ //checks to ensure creative check doesn't get set to false more than once.
 					$plugin->setCreativeCheck($player, false);
 					}
 				return;
