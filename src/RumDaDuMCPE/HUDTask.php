@@ -9,7 +9,11 @@ use pocketmine\Player;
 class HUDTask extends Task {
 	public function onRun (int $currentTick) {
 		$plugin = CombatHUD::getInstance();
+		
 		foreach ($plugin->getServer()->getOnlinePlayers() as $player) {
+		if(!$player->spawned){
+		return;
+		}
 			if ($plugin->PlayerisInCombat($player)) {
 				if(!$plugin->hasCreativeCheck($player)){
 $plugin->setCreativeCheck($player, true);
