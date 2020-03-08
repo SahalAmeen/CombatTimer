@@ -10,7 +10,7 @@ class HUDTask extends Task {
 		$plugin = CombatHUD::getInstance();
 		foreach ($plugin->getServer()->getOnlinePlayers() as $player) {
 			if ($plugin->PlayerisInCombat($player)) {
-				if($player->getAllowFlight() && !$player->isCreative()){
+				if($player->getAllowFlight() && $plugin->CreativeCheck()){
 					$player->setAllowFlight(false);
 					$player->setFlying(false);
 					$player->sendMessage(TextFormat::colorize("&cYou cannot fly whilst in combat. Disabled your flight."));
