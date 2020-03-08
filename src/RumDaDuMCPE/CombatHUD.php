@@ -1,11 +1,15 @@
 <?php
 
 namespace RumDaDuMCPE;
+use pocketmine\plugin\PluginBase;
+use pocketmine\event\Listener;
+use pocketmine\Player;
 
-class CombatHUD extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Listener {
+class CombatHUD extends PluginBase implements Listener {
 
 	private static $instance;
-
+        public $creativeCheck = false;
+	
 	public function onEnable() {
 		self::$instance = $this;
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
@@ -17,13 +21,19 @@ class CombatHUD extends \pocketmine\plugin\PluginBase implements \pocketmine\eve
 		return self::$instance;
 	}
 
-	public function playerIsInCombat(\pocketmine\Player $player) : bool {
+	public function playerIsInCombat(Player $player) : bool {
 		$cl = $this->getServer()->getPluginManager()->getPlugin("CombatLogger");
 		if ($cl->isTagged($player)) return true;
 		return false;
 	}
+	public function CreativeCheck(): bool{
+         return $this->creativeCheck;
+	}
+public function setCreativeCheck(bool $creativeCheck){
+$this->creativeCheck = $creativeCheck;
+}
 
-	public function sendHUD(\pocketmine\Player $player) : string {
+	public function sendHUD(Player $player) : string {
 		$cl = $this->getServer()->getPluginManager()->getPlugin("CombatLogger");
 		$timeleft = $cl->getTagDuration($player);
 		return	"§l§cYou are now engaged in combat!\n".
